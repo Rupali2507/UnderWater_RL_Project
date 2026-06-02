@@ -1,10 +1,4 @@
 """
-environment.py — Shared environment and obstacle classes
-Autonomous Vehicle OOP Project
-
-Commit this to main alongside base.py before either intern branches.
-
-Usage:
     from environment import OceanEnvironment, AerialEnvironment, ObstacleManager
 """
 
@@ -30,7 +24,7 @@ class Obstacle:
                 f"severity={self.severity}, radius={self.radius_metres}m)")
 
 
-# ObstacleManager — shared by both interns, environment-agnostic
+# ObstacleManager 
 
 class ObstacleManager:
     """
@@ -40,8 +34,8 @@ class ObstacleManager:
     Rules:
     - Never hardcode obstacles in __init__ of any vehicle class.
     - Always add obstacles at runtime via add_obstacle().
-    - Intern 1 adds: reefs, wrecks, ice fields, shallow banks.
-    - Intern 2 adds: no-fly zones, weather cells, terrain, towers.
+    -  in sea add: reefs, wrecks, ice fields, shallow banks.
+    -  in air add: no-fly zones, weather cells, terrain, towers.
     """
 
     EARTH_RADIUS_M = 6_371_000  # metres
@@ -116,7 +110,7 @@ class OceanEnvironment:
     """
     Models the ocean/sea environment for sea-based vehicles.
 
-    Intern 1 usage:
+    
         ocean = OceanEnvironment()
         super().__init__(..., environment=ocean)
 
@@ -129,7 +123,7 @@ class OceanEnvironment:
             raise RuntimeError("Sea state too rough to moor")
     """
 
-    # Beaufort / WMO sea state descriptions (index = state 0-9)
+    #  WMO sea state descriptions (index = state 0-9)
     SEA_STATE_DESCRIPTIONS = [
         "Glassy",       # 0
         "Rippled",      # 1
@@ -165,7 +159,7 @@ class OceanEnvironment:
         self._sea_state: int = max(0, min(9, sea_state))
         self.max_depth: float = max_depth                # metres
 
-    # -- Sea state -----------------------------------------------------------
+    #  Sea state 
 
     @property
     def sea_state(self) -> int:
@@ -184,7 +178,7 @@ class OceanEnvironment:
         """Approximate significant wave height in metres for current sea state."""
         return self._WAVE_HEIGHTS[self._sea_state]
 
-    # -- Depth & pressure ----------------------------------------------------
+    #  Depth & pressure 
 
     def pressure_at_depth(self, depth_metres: float) -> float:
         """
@@ -210,7 +204,7 @@ class OceanEnvironment:
             return False, f"Visibility {self.visibility}m is critically low for safe diving."
         return True, "Conditions safe for diving."
 
-    # -- Runtime updates -----------------------------------------------------
+    #  Runtime updates 
 
     def update_conditions(self, **kwargs) -> None:
         """
@@ -222,7 +216,7 @@ class OceanEnvironment:
                 raise AttributeError(f"OceanEnvironment has no attribute '{key}'.")
             setattr(self, key, value)
 
-    # -- Representation ------------------------------------------------------
+    #  Representation 
 
     def get_status(self) -> dict:
         return {
@@ -247,15 +241,14 @@ class OceanEnvironment:
         return self.__str__()
 
 
-# ---------------------------------------------------------------------------
-# AerialEnvironment — Intern 2 owns this class
-# ---------------------------------------------------------------------------
+
+# AerialEnvironment 
 
 class AerialEnvironment:
     """
     Models the aerial environment for aerial vehicles.
 
-    Intern 2 usage:
+    
         sky = AerialEnvironment()
         super().__init__(..., environment=sky)
 
@@ -329,7 +322,7 @@ class AerialEnvironment:
         """0=safe, 1=caution, 2=warning, 3=abort."""
         return self.WEATHER_DANGER.get(self._weather, 0)
 
-    # -- Safety checks -------------------------------------------------------
+    # -- Safety checks 
 
     def is_safe_to_fly(self) -> tuple[bool, str]:
         """
