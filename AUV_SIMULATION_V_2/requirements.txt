@@ -1,0 +1,32 @@
+stable-baselines3 
+supersuit
+tensorboard
+setuptools<70.0.0
+# Core RL & Math
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2+cpu 
+numpy==1.26.4
+
+# Environment & Visuals
+pettingzoo==1.24.3
+pygame==2.5.2
+gymnasium==0.29.1
+
+# Configuration & UI
+PyYAML==6.0.1
+
+
+# Real-world geography
+global-land-mask
+requests
+Pillow
+
+streamlit>=1.40.0
+streamlit-folium>=0.27.0
+folium>=0.17.0
+tqdm 
+rich
+
+# Optional but recommended for Phase 2 readiness
+# hydra-core==1.3.2
+# wandb==0.16.4

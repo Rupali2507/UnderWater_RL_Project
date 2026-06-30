@@ -1,0 +1,27 @@
+# --- Python Virtual Environment ---
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# --- Simulation Artifacts ---
+# Do not track trained models or local logs
+models/*.zip
+logs/
+naval_tensorboard/
+
+# --- IDE/Environment Settings ---
+.vscode/
+.idea/
+.DS_Store
+
+# --- Data/Temporary Files ---
+*.csv
+*.log
+*.tmp
+
+
+
+
+models
